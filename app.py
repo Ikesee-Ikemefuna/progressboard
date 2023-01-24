@@ -7,11 +7,6 @@ import json
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-# user_repos = json.load(open("user_repos.json"))
-leaderboard = Leaderboard(org="DB-Teaching")
-user_repos = leaderboard.user_repos
-repos = leaderboard.repos
-data = leaderboard.data
 
 @app.route("/")
 def heatmap():
@@ -22,8 +17,8 @@ def heatmap():
 
 @app.route("/semester/<string:semester>")
 def heatmap_semester(semester):
-    semester_data = {'22W': ["1990Flori", "AKHILB007"], '22S': ["Aleksar05", "Alexandra18636"]} # Make this importable from a file
-    users = semester_data[semester]
+    semester_data = {'21W':["Caleblak", "Chinwendu22", "Christabel-Oreva", "DainaBulmeistere", "DeaDurro", "DentistRawand", "Dr-sizzle", "Elsonpaty2020", "Favourmekowulu"], '22W': ["1990Flori", "AKHILB007", "ahmedalwaheby", "AnnaScandolera", "Mahsa-Rouzkhatouni", "Bekka29", "ShoikatSajib", "Simrannk99"], '22S': ["Aleksar05", "Alexandra18636", "AlmotazKabel", "Amit021", "Ikesee-Ikemefuna", "KizzyAdrain", "MadalinaLupacescu", "OliviaA22", "Tanmaytc25"]}
+    users = semester_data['22W']
 
     return render_template(
         "heatmap_semester.html",
@@ -66,7 +61,8 @@ def api_users():
 
 @app.route("/api/v1/user_repos/<string:semester>")
 def api_users_semester(semester):
-    semester_data = {'22W': ["1990Flori", "AKHILB007"], '22S': ["Aleksar05", "Alexandra18636"]} # Make this importable from a file
+    
+    semester_data = {'21W':["Caleblak", "Chinwendu22", "Christabel-Oreva", "DainaBulmeistere", "DeaDurro", "DentistRawand", "Dr-sizzle", "Elsonpaty2020", "Favourmekowulu"], '22W': ["1990Flori", "AKHILB007", "ahmedalwaheby", "AnnaScandolera", "Mahsa-Rouzkhatouni", "Bekka29", "ShoikatSajib", "Simrannk99"], '22S': ["Aleksar05", "Alexandra18636", "AlmotazKabel", "Amit021", "Ikesee-Ikemefuna", "KizzyAdrain", "MadalinaLupacescu", "OliviaA22", "Tanmaytc25"    ]} # Make this importable from a file
 
     if semester in semester_data.keys():
         users = semester_data[semester]
